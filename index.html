@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的展示页</title>
+    <title>本地文件展示页</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
         }
         body {
-            background: #f5f5f5;
-            padding: 40px 20px;
+            background: #f8f9fa;
+            padding: 20px 15px;
             max-width: 800px;
             margin: 0 auto;
+            min-height: 100vh;
         }
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #222;
             margin-bottom: 20px;
+            font-size: 22px;
         }
         .txt-desc {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
+            background: #fafbfc;
+            padding: 18px;
+            border-radius: 10px;
             margin: 20px 0;
-            line-height: 1.7;
+            line-height: 1.8;
             white-space: pre-wrap;
+            color: #444;
+            border: 1px solid #f0f0f0;
+            min-height: 60px;
         }
         .image-box {
             text-align: center;
@@ -43,18 +48,40 @@
         .image-box img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
         }
-        .file-box {
+        .button-group {
             text-align: center;
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
         }
         .download-btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 13px 26px;
             background: #4285f4;
             color: white;
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            min-width: 140px;
+        }
+        .download-btn:hover {
+            background: #3367d6;
+            transform: translateY(-2px);
+        }
+        .btn-renxiaoliao {
+            background: #00b894;
+        }
+        .btn-renxiaoliao:hover {
+            background: #00a885;
         }
     </style>
 </head>
@@ -62,26 +89,33 @@
     <div class="container">
         <h1>图片与文件说明展示</h1>
         
-        <!-- 这里自动显示 文件.txt 里的内容 -->
         <div class="txt-desc" id="textArea">加载说明文字中...</div>
 
-        <!-- 图片 -->
         <div class="image-box">
-            <img src="图片.jpg" alt="展示图片">
+            <!-- 在线永久可用图片 -->
+            <img src="https://picsum.photos/800/400" alt="展示图片">
         </div>
 
-        <!-- 文件下载 -->
-        <div class="file-box">
-            <a href="文件.pdf" class="download-btn" download>点击下载文件</a>
+        <div class="button-group">
+            <a href="https://92311.my" class="download-btn" target="_blank">点击进入98官网</a>
+            <a href="https://qq138.cc" class="download-btn btn-renxiaoliao" target="_blank">任小聊下载</a>
         </div>
     </div>
 
     <script>
-        // 读取 文件.txt
-        fetch('文件.txt')
-            .then(res => res.text())
-            .then(text => {
-                document.getElementById('textArea').textContent = text;
-            })
+        async function loadTextFile() {
+            const textArea = document.getElementById('textArea');
+            try {
+                const response = await fetch('文件.txt');
+                if (!response.ok) throw new Error('文件不存在');
+                const text = await response.text();
+                textArea.textContent = text;
+            } catch (err) {
+                textArea.textContent = "⚠️ 未找到 文件.txt";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', loadTextFile);
     </script>
 </body>
+</html>
