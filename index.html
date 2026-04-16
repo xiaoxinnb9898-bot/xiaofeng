@@ -52,6 +52,11 @@
             display: block;
             margin: 0 auto;
         }
+        .image-box .img-tip {
+            color: #999;
+            margin-top: 10px;
+            font-size: 14px;
+        }
         .button-group {
             text-align: center;
             margin-top: 25px;
@@ -92,11 +97,13 @@
         <div class="txt-desc" id="textArea">加载说明文字中...</div>
 
         <div class="image-box">
-            <!-- 在线永久可用图片 -->
-            <img src="https://picsum.photos/800/400" alt="展示图片">
+            <!-- 已修改为当前仓库里的图片文件名 -->
+            <img src="话术单机器人数据图小峰.jpg" alt="展示图片" onerror="this.style.display='none';document.getElementById('imgTip').style.display='block'">
+            <div id="imgTip" class="img-tip" style="display:none;">⚠️ 未找到 话术单机器人数据图小峰.jpg</div>
         </div>
 
         <div class="button-group">
+            <!-- 已更换为 92311.my 网址 -->
             <a href="https://92311.my" class="download-btn" target="_blank">点击进入98官网</a>
             <a href="https://qq138.cc" class="download-btn btn-renxiaoliao" target="_blank">任小聊下载</a>
         </div>
